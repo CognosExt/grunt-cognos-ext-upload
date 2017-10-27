@@ -50,6 +50,7 @@
     "standard-version": "^4.2.0"
   },
   "dependencies": {
+    "fs-utils": "^0.7.0",
     "request": "^2.83.0"
   }
 }
