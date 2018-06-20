@@ -38,19 +38,20 @@
   },
   "homepage": "https://github.com/CognosExt/grunt-cognos-ext-upload#readme",
   "devDependencies": {
-    "cz-conventional-changelog": "^2.0.0",
-    "documentation": "^5.3.3",
-    "grunt": "^1.0.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "documentation": "^8.0.0",
+    "grunt": "^1.0.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-nodeunit": "^1.0.0",
     "grunt-documentation": "^1.2.3",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
-    "prettier": "^1.7.4",
-    "standard-version": "^4.2.0"
+    "prettier": "^1.13.5",
+    "standard-version": "^4.4.0"
   },
   "dependencies": {
     "fs-utils": "^0.7.0",
-    "request": "^2.83.0"
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   }
 }
