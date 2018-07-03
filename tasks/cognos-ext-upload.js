@@ -10,9 +10,10 @@ var fs = require('fs');
  *
  * @param {Object} options
  * @param {string} options.name Name of the extension as found in the specs.json (TODO: read the name from the specs.json)
- * @param {string} options.user Cognos Username with enough priviliges to upload (new) extentions
+ * @param {string} options.user Cognos Username with enough priviliges to upload (new) extensions
  * @param {string} options.password Password of the user
  * @param {string} options.url URL of the homepage of your Cognos 11 installation (eg. https://localhost/ibmcognos )
+ * @param {string} options.url type of upload. Default is 'extensions', for themes use 'themes'.
  * @param {string} options.zipfile name of the zipfile to upload. Defaults to dist/extension.zip
  * @param {string} options.debug Creates more output
  * @example
@@ -24,6 +25,7 @@ var fs = require('fs');
  *               user: "admin",
  *               password: "secret",
  *               url: "https://localhost/ibmcognos",
+ *               type: "extensions",
  *               debug: false
  *           }
  *       },
@@ -33,13 +35,14 @@ var fs = require('fs');
 function gruntUpload(grunt) {
   grunt.registerMultiTask(
     'cognos_ext_upload',
-    'Use Grunt to upload a cognos extentions zip file.',
+    'Use Grunt to upload a cognos extensions zip file.',
     function() {
       var options = this.options({
         name: '',
         user: '',
         password: '',
         url: '',
+        type: 'extensions',
         zipfile: 'dist/extension.zip',
         debug: false
       });
@@ -134,7 +137,9 @@ function gruntUpload(grunt) {
                     {
                       url:
                         options.url +
-                        '/bi/v1/plugins/extensions/' +
+                        '/bi/v1/plugins/' +
+                        options.type +
+                        '/' +
                         options.name,
                       headers: {
                         'X-XSRF-TOKEN': token,
