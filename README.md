@@ -44,8 +44,10 @@ data object passed into `grunt.initConfig()`.
     -   `options.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the extension as found in the specs.json (TODO: read the name from the specs.json)
     -   `options.user` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Cognos Username with enough priviliges to upload (new) extensions
     -   `options.password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Password of the user
+    -   `options.namespace` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Defaults to the default namespace, use this to set or override. This is the id,
+                                          not the name of the namespace
     -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** URL of the homepage of your Cognos 11 installation (eg. <https://localhost/ibmcognos> )
-    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of upload. Default is 'extensions', for themes use 'themes'.
+    -   `options.type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of upload. Default is 'extensions', for themes use 'themes'.
     -   `options.zipfile` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the zipfile to upload. Defaults to dist/extension.zip
     -   `options.debug` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Creates more output
 
@@ -59,6 +61,7 @@ grunt.initConfig({
               name: 'My_Extension',
               user: "admin",
               password: "secret",
+              namespace: "MyNamespace",
               url: "https://localhost/ibmcognos",
               type: "extensions",
               debug: false
