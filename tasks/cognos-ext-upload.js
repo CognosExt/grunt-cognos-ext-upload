@@ -12,8 +12,10 @@ var fs = require('fs');
  * @param {string} options.name Name of the extension as found in the specs.json (TODO: read the name from the specs.json)
  * @param {string} options.user Cognos Username with enough priviliges to upload (new) extensions
  * @param {string} options.password Password of the user
+ * @param {string} options.namespace Defaults to the default namespace, use this to set or override. This is the id,
+ *                                   not the name of the namespace
  * @param {string} options.url URL of the homepage of your Cognos 11 installation (eg. https://localhost/ibmcognos )
- * @param {string} options.url type of upload. Default is 'extensions', for themes use 'themes'.
+ * @param {string} options.type type of upload. Default is 'extensions', for themes use 'themes'.
  * @param {string} options.zipfile name of the zipfile to upload. Defaults to dist/extension.zip
  * @param {string} options.debug Creates more output
  * @example
@@ -24,6 +26,7 @@ var fs = require('fs');
  *               name: 'My_Extension',
  *               user: "admin",
  *               password: "secret",
+ *               namespace: "MyNamespace",
  *               url: "https://localhost/ibmcognos",
  *               type: "extensions",
  *               debug: false
@@ -41,6 +44,7 @@ function gruntUpload(grunt) {
         name: '',
         user: '',
         password: '',
+        namespace: '',
         url: '',
         type: 'extensions',
         zipfile: 'dist/extension.zip',
@@ -51,7 +55,7 @@ function gruntUpload(grunt) {
       var done = this.async();
 
       var token = '';
-      var namespace = '';
+      var namespace = options.namespace;
 
       var initialLoginOptions = {
         type: 'GET',
@@ -83,11 +87,13 @@ function gruntUpload(grunt) {
 
           // Find the namespace in the body
           grunt.log.writeln(JSON.stringify(body));
-          JSON.parse(body).promptInfo.displayObjects.forEach(function(item) {
-            if (item.name == 'CAMNamespace') {
-              namespace = item.value;
-            }
-          });
+          if (!namespace) {
+            JSON.parse(body).promptInfo.displayObjects.forEach(function(item) {
+              if (item.name == 'CAMNamespace') {
+                namespace = item.value;
+              }
+            });
+          }
           grunt.log.writeln('Namespace: ' + namespace);
 
           // Set the parameters of the login POST request
