@@ -42,6 +42,7 @@ function gruntUpload(grunt) {
         name: '',
         user: '',
         password: '',
+        namespace: '',
         url: '',
         type: 'extensions',
         zipfile: 'dist/extension.zip',
