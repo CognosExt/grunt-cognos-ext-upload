@@ -44,8 +44,9 @@ data object passed into `grunt.initConfig()`.
     -   `options.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the extension as found in the specs.json (TODO: read the name from the specs.json)
     -   `options.user` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Cognos Username with enough priviliges to upload (new) extensions
     -   `options.password` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Password of the user
+    -   `options.namespace` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The Cognos namespace id, if not the default
     -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** URL of the homepage of your Cognos 11 installation (eg. <https://localhost/ibmcognos> )
-    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of upload. Default is 'extensions', for themes use 'themes'.
+    -   `options.type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of upload. Default is 'extensions', for themes use 'themes'.
     -   `options.zipfile` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the zipfile to upload. Defaults to dist/extension.zip
     -   `options.debug` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Creates more output
 
@@ -56,11 +57,13 @@ grunt.initConfig({
   documentation: {
       default: {
           options: {
-              name: 'My_Extension',
+              name: 'My_Theme',
               user: "admin",
               password: "secret",
+              namespace: "MyNameSpace",
               url: "https://localhost/ibmcognos",
-              type: "extensions",
+              type: "themes",
+              zipfile: "dist/mytheme.zip"
               debug: false
           }
       },

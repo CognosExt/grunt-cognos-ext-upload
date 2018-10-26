@@ -14,8 +14,7 @@ module.exports = function(grunt) {
         options: {
           destination: 'docs'
         }
-      },
-
+      }
     },
     nodeunit: {
       tasks: ['test/test.js']
@@ -30,10 +29,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-documentation');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('default', [
-    'clean',
-    'documentation',
-    'nodeunit',
-
-  ]);
+  grunt.registerTask('default', ['clean', 'documentation', 'nodeunit']);
 };

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>grunt-cognos-ext-upload 1.1.3 | Documentation</title>
+  <title>grunt-cognos-ext-upload 1.2.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>grunt-cognos-ext-upload</h3>
-          <div class='mb1'><code>1.1.3</code></div>
+          <div class='mb1'><code>1.2.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -113,7 +113,7 @@ data object passed into <code>grunt.initConfig()</code>.</p>
                 <tr>
                   <td class='break-word'><span class='code bold'>options.user</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
                   </td>
-                  <td class='break-word'><span>Cognos Username with enough priviliges to upload (new) extentions
+                  <td class='break-word'><span>Cognos Username with enough priviliges to upload (new) extensions
 </span></td>
                 </tr>
               
@@ -125,11 +125,25 @@ data object passed into <code>grunt.initConfig()</code>.</p>
                 </tr>
               
                 <tr>
+                  <td class='break-word'><span class='code bold'>options.namespace</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+                  </td>
+                  <td class='break-word'><span>The Cognos namespace id, if not the default
+</span></td>
+                </tr>
+              
+                <tr>
                   <td class='break-word'><span class='code bold'>options.url</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
                   </td>
                   <td class='break-word'><span>URL of the homepage of your Cognos 11 installation (eg. 
 <a href="https://localhost/ibmcognos">https://localhost/ibmcognos</a>
  )
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.type</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+                  </td>
+                  <td class='break-word'><span>type of upload. Default is 'extensions', for themes use 'themes'.
 </span></td>
                 </tr>
               
@@ -169,11 +183,14 @@ data object passed into <code>grunt.initConfig()</code>.</p>
   <span class="hljs-attr">documentation</span>: {
       <span class="hljs-attr">default</span>: {
           <span class="hljs-attr">options</span>: {
-              <span class="hljs-attr">name</span>: <span class="hljs-string">'My_Extension'</span>,
+              <span class="hljs-attr">name</span>: <span class="hljs-string">'My_Theme'</span>,
               <span class="hljs-attr">user</span>: <span class="hljs-string">"admin"</span>,
               <span class="hljs-attr">password</span>: <span class="hljs-string">"secret"</span>,
+              <span class="hljs-attr">namespace</span>: <span class="hljs-string">"MyNameSpace"</span>,
               <span class="hljs-attr">url</span>: <span class="hljs-string">"https://localhost/ibmcognos"</span>,
-              <span class="hljs-attr">debug</span>: <span class="hljs-literal">false</span>
+              <span class="hljs-attr">type</span>: <span class="hljs-string">"themes"</span>,
+              <span class="hljs-attr">zipfile</span>: <span class="hljs-string">"dist/mytheme.zip"</span>
+              debug: <span class="hljs-literal">false</span>
           }
       },
   }

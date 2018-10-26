@@ -1,6 +1,4 @@
 'use strict';
-var request = require('request');
-var fs = require('fs');
 
 /**
  * Grunt Cognos Extension Upload
@@ -12,8 +10,9 @@ var fs = require('fs');
  * @param {string} options.name Name of the extension as found in the specs.json (TODO: read the name from the specs.json)
  * @param {string} options.user Cognos Username with enough priviliges to upload (new) extensions
  * @param {string} options.password Password of the user
+ * @param {string} options.namespace The Cognos namespace id, if not the default
  * @param {string} options.url URL of the homepage of your Cognos 11 installation (eg. https://localhost/ibmcognos )
- * @param {string} options.url type of upload. Default is 'extensions', for themes use 'themes'.
+ * @param {string} options.type type of upload. Default is 'extensions', for themes use 'themes'.
  * @param {string} options.zipfile name of the zipfile to upload. Defaults to dist/extension.zip
  * @param {string} options.debug Creates more output
  * @example
@@ -21,11 +20,13 @@ var fs = require('fs');
  *   documentation: {
  *       default: {
  *           options: {
- *               name: 'My_Extension',
+ *               name: 'My_Theme',
  *               user: "admin",
  *               password: "secret",
+ *               namespace: "MyNameSpace",
  *               url: "https://localhost/ibmcognos",
- *               type: "extensions",
+ *               type: "themes",
+ *               zipfile: "dist/mytheme.zip"
  *               debug: false
  *           }
  *       },
@@ -47,124 +48,44 @@ function gruntUpload(grunt) {
         debug: false
       });
 
-      grunt.log.write('Going to upload ' + options.name);
+      grunt.log.writeln('Going to upload ' + options.name);
       var done = this.async();
 
-      var token = '';
-      var namespace = '';
+      const name = options.name;
+      const zipfile = options.zipfile;
+      const url = options.url;
+      const debug = options.debug;
+      const user = options.user;
+      const password = options.password;
+      const namespace = options.namespace;
+      const exttype = options.type;
 
-      var initialLoginOptions = {
-        type: 'GET',
-        url: options.url + '/bi/v1/login',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        skipErrorHandling: true
-      };
+      const jcognos = require('jcognos');
+      var getCognos = jcognos.getCognos;
 
-      request.debug = options.debug;
-      request.defaults({
-        jar: true
-      });
-      var j = request.jar();
-      request.get(
-        {
-          url: options.url + '/bi/v1/login',
-          jar: j
-        },
-        function(error, response, body) {
-          // Find the XSRF Token in the cookie
-          var cookies = j.getCookies(options.url + '/bi');
-          cookies.forEach(function(cook) {
-            if ((cook.key = 'XSRFToken')) {
-              token = cook.value;
-              grunt.log.debug('token = ' + token);
+      var result = getCognos(url, debug)
+        .then(function(lcognos) {
+          lcognos.login(user, password, namespace).then(function() {
+            grunt.log.writeln('going to upload ' + zipfile);
+            if (options.debug) {
+              grunt.log.writeln('going to upload ' + name);
+              grunt.log.writeln('going to type ' + exttype);
             }
+            lcognos
+              .uploadExtension(zipfile, name, exttype)
+              .then(function() {
+                console.log('Uploaded Extension');
+              })
+              .catch(function(err) {
+                console.log('Error uploading', err);
+              });
           });
-
-          // Find the namespace in the body
-          grunt.log.writeln(JSON.stringify(body));
-          JSON.parse(body).promptInfo.displayObjects.forEach(function(item) {
-            if (item.name == 'CAMNamespace') {
-              namespace = item.value;
-            }
-          });
-          grunt.log.writeln('Namespace: ' + namespace);
-
-          // Set the parameters of the login POST request
-          var params = {
-            parameters: [
-              {
-                name: 'CAMNamespace',
-                value: namespace
-              },
-              {
-                name: 'h_CAM_action',
-                value: 'LogonAs'
-              },
-              {
-                name: 'CAMUsername',
-                value: options.user
-              },
-              {
-                name: 'CAMPassword',
-                value: options.password
-              }
-            ]
-          };
-          var paramsJSON = JSON.stringify(params);
-          request.cookie('XSRF-TOKEN=' + token);
-          var k = request.jar();
-
-          // Post the request
-          request.post(
-            {
-              url: options.url + '/bi/v1/login',
-              body: paramsJSON,
-              headers: {
-                'X-XSRF-TOKEN': token,
-                'X-Requested-With': 'XMLHttpRequest',
-                'Content-Type': 'application/json; charset=UTF-8',
-                Cookie: 'XSRF-TOKEN=' + token // this last one is the trick, it is not a cookie!
-              },
-              jar: k
-            },
-            function(error, response, body) {
-              if (response.statusCode == 200) {
-                // We are logged in, let's upload
-                grunt.log.writeln('Uploading');
-                fs.createReadStream(options.zipfile).pipe(
-                  request.put(
-                    {
-                      url:
-                        options.url +
-                        '/bi/v1/plugins/' +
-                        options.type +
-                        '/' +
-                        options.name,
-                      headers: {
-                        'X-XSRF-TOKEN': token,
-                        'X-Requested-With': 'XMLHttpRequest',
-                        Cookie: 'XSRF-TOKEN=' + token
-                      },
-                      jar: k
-                    },
-                    function(error, response, body) {
-                      if (response.statusCode == 200) {
-                        grunt.log.writeln(options.name + ' Uploaded');
-                      } else {
-                        grunt.log.writeln('error: ' + error);
-                        grunt.log.writeln(JSON.stringify(response));
-                      }
-                    }
-                  )
-                );
-              } else {
-                grunt.log.writeln('error while uploading: ' + error);
-              }
-            }
-          );
-        }
-      );
+        })
+        .catch(function(error) {
+          console.log(error);
+          grunt.log.writeln('error: ' + error);
+          grunt.log.writeln(JSON.stringify(error.response));
+        });
     }
   );
 }
