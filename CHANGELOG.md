@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.2.2...v1.4.0) (2018-10-26)
+
+
+### Features
+
+* Namespace support ([3b52133](https://github.com/CognosExt/grunt-cognos-ext-upload/commit/3b52133))
+
+
+
 <a name="1.2.2"></a>
 
 ## [1.2.2](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.2.1...v1.2.2) (2018-10-26)
