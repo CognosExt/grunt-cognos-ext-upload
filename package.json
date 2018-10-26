@@ -7,7 +7,6 @@
     "test": "test"
   },
   "scripts": {
-    "precommit": "documentation readme tasks/cognos-ext-upload.js  --section Usage; git add README.md ; lint-staged",
     "release": "standard-version",
     "test": "grunt"
   },
@@ -51,5 +50,10 @@
   },
   "dependencies": {
     "jcognos": "^1.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "documentation readme tasks/cognos-ext-upload.js  --section Usage; git add README.md ; lint-staged"
+    }
   }
 }
