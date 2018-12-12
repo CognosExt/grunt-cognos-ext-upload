@@ -1,6 +1,6 @@
 {
   "name": "grunt-cognos-ext-upload",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Grunt package that uploads extensions to Cognos",
   "directories": {
     "doc": "docs",
@@ -43,13 +43,13 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-nodeunit": "^1.0.0",
     "grunt-documentation": "^1.2.3",
-    "husky": "^1.0.0",
-    "lint-staged": "^8.0.0",
-    "prettier": "^1.14.3",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
     "standard-version": "^4.4.0"
   },
   "dependencies": {
-    "jcognos": "^1.5.1"
+    "jcognos": "^1.7.0"
   },
   "husky": {
     "hooks": {

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.4.0...v1.4.1) (2018-12-12)
+
+
+### Bug Fixes
+
+* Never called done() so no other task would ever execute after this one ([d1be8ad](https://github.com/CognosExt/grunt-cognos-ext-upload/commit/d1be8ad))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.2.2...v1.4.0) (2018-10-26)
 
