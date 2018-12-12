@@ -76,6 +76,7 @@ function gruntUpload(grunt) {
               .uploadExtension(zipfile, name, exttype)
               .then(function() {
                 console.log('Uploaded Extension');
+                done();
               })
               .catch(function(err) {
                 console.log('Error uploading', err);
