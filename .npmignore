@@ -1,3 +1,4 @@
 .gitignore
 circle.yml
 test
+docs
