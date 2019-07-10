@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.4.1...v1.5.0) (2019-07-10)
+
+
+### Features
+
+* Added options to ignore invalid ssl certificates ([88308f8](https://github.com/CognosExt/grunt-cognos-ext-upload/commit/88308f8))
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.4.0...v1.4.1) (2018-12-12)
 
