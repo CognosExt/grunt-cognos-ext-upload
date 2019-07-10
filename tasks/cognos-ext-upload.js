@@ -14,6 +14,7 @@
  * @param {string} options.url URL of the homepage of your Cognos 11 installation (eg. https://localhost/ibmcognos )
  * @param {string} options.type type of upload. Default is 'extensions', for themes use 'themes'.
  * @param {string} options.zipfile name of the zipfile to upload. Defaults to dist/extension.zip
+ * @param {boolean} options.checkssl Check if ssl certificates are valid. Default is true.
  * @param {string} options.debug Creates more output
  * @example
  * grunt.initConfig({
@@ -26,7 +27,8 @@
  *               namespace: "MyNameSpace",
  *               url: "https://localhost/ibmcognos",
  *               type: "themes",
- *               zipfile: "dist/mytheme.zip"
+ *               zipfile: "dist/mytheme.zip",
+ *               checkssl: false,
  *               debug: false
  *           }
  *       },
@@ -46,6 +48,7 @@ function gruntUpload(grunt) {
         url: '',
         type: 'extensions',
         zipfile: 'dist/extension.zip',
+        checkssl: true,
         debug: false
       });
 
@@ -60,6 +63,7 @@ function gruntUpload(grunt) {
       const password = options.password;
       const namespace = options.namespace;
       const exttype = options.type;
+      const checkssl = options.checkssl;
 
       const jcognos = require('jcognos');
       var getCognos = jcognos.getCognos;
@@ -73,7 +77,7 @@ function gruntUpload(grunt) {
               grunt.log.writeln('going to type ' + exttype);
             }
             lcognos
-              .uploadExtension(zipfile, name, exttype)
+              .uploadExtension(zipfile, name, exttype, { checkssl: checkssl })
               .then(function() {
                 console.log('Uploaded Extension');
                 done();
