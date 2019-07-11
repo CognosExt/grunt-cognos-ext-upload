@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.5.2...v1.6.0) (2019-07-11)
+
+
+### Features
+
+* Added new option for timeout and changed name of option to ignore invalid ssl certificates ([10f0724](https://github.com/CognosExt/grunt-cognos-ext-upload/commit/10f0724))
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.5.1...v1.5.2) (2019-07-10)
 
