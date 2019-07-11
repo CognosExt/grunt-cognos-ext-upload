@@ -48,7 +48,8 @@ data object passed into `grunt.initConfig()`.
     -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** URL of the homepage of your Cognos 11 installation (eg. <https://localhost/ibmcognos> )
     -   `options.type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** type of upload. Default is 'extensions', for themes use 'themes'.
     -   `options.zipfile` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the zipfile to upload. Defaults to dist/extension.zip
-    -   `options.checkssl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Check if ssl certificates are valid. Default is true.
+    -   `options.timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Timeout of connection in milliseconds, defaults to 60000
+    -   `options.ignoreInvalidCertificates` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Ignore invalid ssl certificates. Default is false.
     -   `options.debug` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Creates more output
 
 ### Examples
@@ -65,7 +66,8 @@ grunt.initConfig({
               url: "https://localhost/ibmcognos",
               type: "themes",
               zipfile: "dist/mytheme.zip",
-              checkssl: false,
+              timeout: 30000,
+              ignoreInvalidCertificates: true,
               debug: false
           }
       },

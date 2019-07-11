@@ -14,7 +14,8 @@
  * @param {string} options.url URL of the homepage of your Cognos 11 installation (eg. https://localhost/ibmcognos )
  * @param {string} options.type type of upload. Default is 'extensions', for themes use 'themes'.
  * @param {string} options.zipfile name of the zipfile to upload. Defaults to dist/extension.zip
- * @param {boolean} options.checkssl Check if ssl certificates are valid. Default is true.
+ * @param {number} options.timeout Timeout of connection in milliseconds, defaults to 60000
+ * @param {boolean} options.ignoreInvalidCertificates Ignore invalid ssl certificates. Default is false.
  * @param {string} options.debug Creates more output
  * @example
  * grunt.initConfig({
@@ -28,7 +29,8 @@
  *               url: "https://localhost/ibmcognos",
  *               type: "themes",
  *               zipfile: "dist/mytheme.zip",
- *               checkssl: false,
+ *               timeout: 30000,
+ *               ignoreInvalidCertificates: true,
  *               debug: false
  *           }
  *       },
@@ -48,7 +50,8 @@ function gruntUpload(grunt) {
         url: '',
         type: 'extensions',
         zipfile: 'dist/extension.zip',
-        checkssl: true,
+        timeout: 60000,
+        ignoreInvalidCertificates: false,
         debug: false
       });
 
@@ -63,12 +66,13 @@ function gruntUpload(grunt) {
       const password = options.password;
       const namespace = options.namespace;
       const exttype = options.type;
-      const checkssl = options.checkssl;
+      const timeout = options.timeout;
+      const ignoreInvalidCertificates = options.ignoreInvalidCertificates;
 
       const jcognos = require('jcognos');
       var getCognos = jcognos.getCognos;
 
-      var result = getCognos(url, debug)
+      var result = getCognos(url, debug, timeout, ignoreInvalidCertificates)
         .then(function(lcognos) {
           lcognos.login(user, password, namespace).then(function() {
             grunt.log.writeln('going to upload ' + zipfile);
@@ -77,7 +81,7 @@ function gruntUpload(grunt) {
               grunt.log.writeln('going to type ' + exttype);
             }
             lcognos
-              .uploadExtension(zipfile, name, exttype, { checkssl: checkssl })
+              .uploadExtension(zipfile, name, exttype)
               .then(function() {
                 console.log('Uploaded Extension');
                 done();
