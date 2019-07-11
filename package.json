@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "fs-utils": "^0.7.0",
-    "jcognos": "^1.13.2"
+    "jcognos": "^2.0.0"
   },
   "husky": {
     "hooks": {
