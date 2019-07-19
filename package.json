@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/CognosExt/grunt-cognos-ext-upload#readme",
   "devDependencies": {
-    "cz-conventional-changelog": "^2.1.0",
+    "cz-conventional-changelog": "^3.0.0",
     "documentation": "^11.0.0",
     "grunt": "^1.0.4",
     "grunt-contrib-clean": "^2.0.0",
