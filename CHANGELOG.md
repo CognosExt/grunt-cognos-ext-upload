@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.6.1...v1.6.2) (2019-09-05)
+
+
+### Bug Fixes
+
+* throw a proper grunt error when upload fails ([476a7ee](https://github.com/CognosExt/grunt-cognos-ext-upload/commit/476a7ee))
+
 ### [1.6.1](https://github.com/CognosExt/grunt-cognos-ext-upload/compare/v1.6.0...v1.6.1) (2019-08-15)
 
 <a name="1.6.0"></a>
