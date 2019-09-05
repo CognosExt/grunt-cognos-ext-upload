@@ -95,7 +95,7 @@ function gruntUpload(grunt) {
           console.log(error);
           grunt.log.writeln('error: ' + error);
           var util = require('util');
-          done(util.isError(err) ? err : new Error(err));
+          done(util.isError(error) ? error : new Error(error));
         });
     }
   );
