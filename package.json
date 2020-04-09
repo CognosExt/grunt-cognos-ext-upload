@@ -44,7 +44,7 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-nodeunit": "^2.0.0",
     "grunt-documentation": "^1.2.3",
-    "husky": "^3.0.5",
+    "husky": "^4.2.4",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "standard-version": "^7.0.0"
