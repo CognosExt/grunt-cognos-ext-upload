@@ -1,6 +1,6 @@
 {
   "name": "grunt-cognos-ext-upload",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Grunt package that uploads extensions to Cognos",
   "directories": {
     "doc": "docs",
